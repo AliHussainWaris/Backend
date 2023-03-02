@@ -16,5 +16,29 @@ module.exports = {
                 console.log("Error : " , err)
             }
         })
+    },
+    getdata:function(){
+        AdminLogins.find((err,result)=>{
+            if(!err){
+                console.log(result)
+
+            }
+            else{
+                console.log("Error Occured : " , err)
+            }
+        })
+    },
+    getondata:function(req,res){
+        AdminLogins.findOne({
+            email:req.body.email
+        },(err,result)=>{
+            if(!err){
+                console.log(result)
+                res.send(result)
+            }
+            else{
+                console.log("Error Occured : " ,err)
+            }
+        })
     }
 }
