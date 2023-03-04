@@ -10,6 +10,7 @@ module.exports = {
             if(!err){
                 console.log(result);
                 res.status(200)
+                res.send(result)
                 console.log("DATA INSERTED SUCCESSFULLY")
             }
             else{
