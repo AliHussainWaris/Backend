@@ -21,7 +21,6 @@ module.exports = {
         AdminLogins.find((err,result)=>{
             if(!err){
                 console.log(result)
-
             }
             else{
                 console.log("Error Occured : " , err)
@@ -38,6 +37,31 @@ module.exports = {
             }
             else{
                 console.log("Error Occured : " ,err)
+            }
+        })
+    },
+    updatadata:function(req,res){
+        AdminLogins.findOneAndUpdate({email:req.body.email}, 
+            {name:req.body.name , password : req.body.passwrod},
+            {new:true},             
+            (err, result)=>{
+            if(!err){
+                res.send(result)
+                console.log(result)
+            }
+            else{
+                console.log("Error Occured : ",err)
+            }
+        })
+    },
+    deletedata:function(req,res){
+        AdminLogins.findOneAndDelete({email:req.body.email},(err,result)=>{
+            if(!err){
+                res.send("Data Deleted")
+                console.log("Data Deleted")
+            }
+            else{
+                console(err)
             }
         })
     }
