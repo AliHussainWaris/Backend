@@ -28,16 +28,15 @@ module.exports = {
             }
         })
     },
-    getondata:function(req,res){
-        AdminLogins.findOne({
-            email:req.body.email
-        },(err,result)=>{
+    getonedata:function(req,res){
+        AdminLogins.findOne({email:req.body.email},
+            (err, result)=>{
             if(!err){
-                console.log(result)
                 res.send(result)
+                console.log(result)
             }
             else{
-                console.log("Error Occured : " ,err)
+                console.log("Error Occured : ",err)
             }
         })
     },
