@@ -33,7 +33,6 @@ module.exports = {
             (err,result)=>{
                 if(!err){
                     res.send(result)
-                    console.log(result)
                 }
                 else{
                     console.log("Error : ",err)
