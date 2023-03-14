@@ -8,12 +8,15 @@ require('./db/db')
 
 const AdminLogin = require("./routes/Admin/Login/AdminLogin")
 const UserLogin = require("./routes/User/Login/UserLogin")
+const Admin_Main_Data = require('./routes/Admin/Data/AdminMainData')
 
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-
+// Admin API's
 app.use("/Admin",AdminLogin)
+app.use("/AdminMainData" , Admin_Main_Data)
+
 app.use("/User",UserLogin)
 
 app.listen(Port , ()=>{
