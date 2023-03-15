@@ -4,8 +4,10 @@ const Schema = mongoose.Schema
 const AdminLoginSchema = new Schema({
     name : String, 
     email : String,
-    password : String
+    password : String,
+    profile: String
 })
+
 
 const AdminLogins = mongoose.model('Admin' , AdminLoginSchema);
 module.exports =  AdminLogins

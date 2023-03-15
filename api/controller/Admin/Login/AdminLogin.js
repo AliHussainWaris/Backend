@@ -6,9 +6,9 @@ module.exports = {
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
+            profile:req.file.filename
         },(err , result)=>{
             if(!err){
-                console.log(result);
                 res.status(200)
                 res.send(result)
                 console.log("DATA INSERTED SUCCESSFULLY")
@@ -58,7 +58,7 @@ module.exports = {
         AdminLogins.findOneAndDelete({email:req.body.email},(err,result)=>{
             if(!err){
                 res.send("Data Deleted")
-                console.log("Data Deleted")
+                console.log("Data Deleted",result)
             }
             else{
                 console(err)
