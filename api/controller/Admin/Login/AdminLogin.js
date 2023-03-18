@@ -32,8 +32,13 @@ module.exports = {
         AdminLogins.findOne({email:req.body.email},
             (err, result)=>{
             if(!err){
-                res.send(result)
-                console.log(result)
+                if(result === null){
+                    res.status(300).send(result)
+                    console.log(result)
+                }else{
+                    res.send(result)
+                    console.log(result)
+                }
             }
             else{
                 console.log("Error Occured : ",err)

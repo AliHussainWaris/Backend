@@ -21,7 +21,14 @@ const second = (req, file, cb) => {
 }
 const upload = multer({ storage: first, filefilter: second });
 
-router.post('/upload' , upload.fields([{ name: 'mainimage', maxCount: 1 }, { name: 'colorimage' } , {name:'wheelimage'} , {name : 'interiorimage'},{name:'lightimage'}]) , Admin_Main_Data.adddata)
+router.post('/upload' , 
+    upload.fields([{ name: 'mainimage', maxCount: 1 }, { name: 'colorimage' } , {name:'wheelimage'} , {name : 'interiorimage'},{name:'lightimage'}]) , 
+    Admin_Main_Data.adddata)
 router.get('/all',Admin_Main_Data.getdata);
+router.get('/single',Admin_Main_Data.getonedata);
+router.put("/update/:name", 
+    upload.fields([{ name: 'mainimage', maxCount: 1 }, { name: 'colorimage' } , {name:'wheelimage'} , {name : 'interiorimage'},{name:'lightimage'}]) ,
+    Admin_Main_Data.updatadata)
+router.delete('/delete/:name',Admin_Main_Data.deletedata)
 
 module.exports = router
