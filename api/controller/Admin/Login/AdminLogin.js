@@ -2,11 +2,17 @@ const AdminLogins = require('../../../models/Admin/Login/AdminLogin')
 
 module.exports = {
     adddata : function(req, res , next){
+        let profileimage = null;
+        if(req.files){
+            if (req.files.profile) {
+                profileimage = req.files.profile[0].filename;
+            }
+        }
         AdminLogins.create({
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
-            profile:req.file.filename
+            profile:profileimage
         },(err , result)=>{
             if(!err){
                 res.status(200)

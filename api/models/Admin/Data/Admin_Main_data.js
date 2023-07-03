@@ -10,7 +10,7 @@ const AdminMainData = new Schema({
     colorimage: {type:Array},
     wheelimage: {type:Array},
     interiorimage: {type:Array},
-    lightimage: {type:Array}
+    lightimage: {type:Array},
 })
 
 const AdminMainDataModel = mongoose.model('Main' , AdminMainData);
