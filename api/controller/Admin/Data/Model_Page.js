@@ -38,25 +38,7 @@ module.exports = {
             res.send("Failed to Insert the Data");
           }
         });
-      },
-      // getdata: function (req, res) {
-        // const carName = req.query.name; // Assuming the query parameter is used in the URL like "/Get?name=Taycan"
-
-        // ModelPageModel.find(
-          // {
-            // name: { $regex: new RegExp(carName, 'i') }
-          // },
-          // (err, result) => {
-            // if (err) {
-              // console.log("Data Fetch Failed", err);
-              // res.status(500).json({ error: "Failed to fetch data" });
-            // } else {
-              // console.log("Data Fetch Successful - Model Page");
-              // res.send(result);
-            // }
-          // }
-        // );
-      // },      
+      },    
       getdata: function (req, res) {
         const carName = req.query.name; // Assuming the query parameter is used in the URL like "/Get?name=Taycan"
 

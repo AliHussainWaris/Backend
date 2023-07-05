@@ -2,17 +2,10 @@ const AdminLogins = require('../../../models/Admin/Login/AdminLogin')
 
 module.exports = {
     adddata : function(req, res , next){
-        let profileimage = null;
-        if(req.files){
-            if (req.files.profile) {
-                profileimage = req.files.profile[0].filename;
-            }
-        }
         AdminLogins.create({
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
-            profile:profileimage
         },(err , result)=>{
             if(!err){
                 res.status(200)
@@ -34,23 +27,24 @@ module.exports = {
             }
         })
     },
-    getonedata:function(req,res){
-        AdminLogins.findOne({email:req.body.email},
-            (err, result)=>{
-            if(!err){
-                if(result === null){
-                    res.status(300).send(result)
-                    console.log(result)
-                }else{
-                    res.send(result)
-                    console.log(result)
-                }
+    getonedata: function (req, res) {
+        AdminLogins.findOne(
+          { email: req.body.email},
+          (err, result) => {
+            if (!err) {
+              if (result === null) {
+                res.status(404).send(result);
+                console.log(result);
+              } else {
+                res.send(result);
+                console.log(result);
+              }
+            } else {
+              console.log("Error Occurred: ", err);
             }
-            else{
-                console.log("Error Occured : ",err)
-            }
-        })
-    },
+          }
+        );
+    },      
     updatadata:function(req,res){
         AdminLogins.findOneAndUpdate({email:req.body.email}, 
             {name:req.body.name , password : req.body.passwrod},
