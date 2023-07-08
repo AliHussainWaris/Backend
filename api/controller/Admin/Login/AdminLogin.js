@@ -1,14 +1,18 @@
 const AdminLogins = require('../../../models/Admin/Login/AdminLogin')
+var bcrypt = require("bcryptjs")
+const salt = bcrypt.genSalt(10)
 
 module.exports = {
     adddata : function(req, res , next){
+        let pass = bcrypt.hashSync(req.body.password , 10)
         AdminLogins.create({
             name: req.body.name,
             email: req.body.email,
-            password: req.body.password,
+            password: pass,
         },(err , result)=>{
             if(!err){
                 res.status(200)
+                console.log(res.password)
                 res.send(result)
                 console.log("DATA INSERTED SUCCESSFULLY")
             }
@@ -28,22 +32,26 @@ module.exports = {
         })
     },
     getonedata: function (req, res) {
-        AdminLogins.findOne(
-          { email: req.body.email},
-          (err, result) => {
-            if (!err) {
-              if (result === null) {
-                res.status(404).send(result);
-                console.log(result);
-              } else {
-                res.send(result);
-                console.log(result);
-              }
+        let password = req.body.password;
+        AdminLogins.findOne({ email: req.body.email }, (err, admin) => {
+          if (!err) {
+            if (admin) {
+              bcrypt.compare(password, admin.password, (err, isMatch) => {
+                if (!err && isMatch ) {
+                  res.status(200).send(admin);
+                } else {
+                  res.status(404).send("Invalid email or password");
+                  console.log("Invalid email or password");
+                }
+              });
             } else {
-              console.log("Error Occurred: ", err);
+              res.status(404).send("Admin not found");
+              console.log("Admin not found");
             }
+          } else {
+            console.log("Error occurred:", err);   
           }
-        );
+        });
     },      
     updatadata:function(req,res){
         AdminLogins.findOneAndUpdate({email:req.body.email}, 

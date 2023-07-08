@@ -58,10 +58,18 @@ module.exports = {
         const carName = req.query.name;
         const carModel = req.query.model;
         let carColor = req.query.color;
+        let carWheel = req.query.wheel;
+        let carLight = req.query.light;
         if (carColor === "Default"){
           carColor = "Silver";
         }
-        ModelPageModel.findOne({name:carName , model:carModel , color:carColor},(err,result)=>{
+        if(carWheel === "Default"){
+          carWheel = "Steel";
+        }
+        if(carLight === "Default"){
+          carLight = "Normal";
+        }
+        ModelPageModel.findOne({name:carName , model:carModel , color:carColor , wheel:carWheel , light:carLight},(err,result)=>{
             if(err){
                 console.log("Data Fetch Failed")
             }
