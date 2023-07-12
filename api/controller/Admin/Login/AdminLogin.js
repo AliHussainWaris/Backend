@@ -9,6 +9,7 @@ module.exports = {
             name: req.body.name,
             email: req.body.email,
             password: pass,
+            admin : req.body.admin
         },(err , result)=>{
             if(!err){
                 res.status(200)
@@ -35,8 +36,8 @@ module.exports = {
         let password = req.body.password;
         AdminLogins.findOne({ email: req.body.email }, (err, admin) => {
           if (!err) {
-            if (admin) {
-              bcrypt.compare(password, admin.password, (err, isMatch) => {
+              if (admin) {
+                bcrypt.compare(password, admin.password, (err, isMatch) => {
                 if (!err && isMatch ) {
                   res.status(200).send(admin);
                 } else {
