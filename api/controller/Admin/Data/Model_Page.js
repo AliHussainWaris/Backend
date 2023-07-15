@@ -38,12 +38,22 @@ module.exports = {
             res.send("Failed to Insert the Data");
           }
         });
+      },
+      getall: function (req, res) {
+        ModelPageModel.find({}, (err, result) => {
+          if (err) {
+            console.log("Data Fetch Failed", err);
+            res.status(500).json({ error: "Failed to fetch data" });
+          } else {
+            console.log("Data Fetch Successful - Model Page");
+            res.send(result);
+          }
+        });
       },    
       getdata: function (req, res) {
-        const carName = req.query.name; // Assuming the query parameter is used in the URL like "/Get?name=Taycan"
-
-        // console.log("Checking: ", req.body.name);
-        ModelPageModel.find({ name: carName }, (err, result) => {
+        const carName = req.query.name;
+        const carColor = req.query.carcolor;
+        ModelPageModel.find({ name: carName  , color : carColor}, (err, result) => {
           if (err) {
             console.log("Data Fetch Failed", err);
             res.status(500).json({ error: "Failed to fetch data" });
@@ -53,7 +63,6 @@ module.exports = {
           }
         });
       },
-      
     getonedata:function(req,res){
         const carName = req.query.name;
         const carModel = req.query.model;
@@ -78,5 +87,28 @@ module.exports = {
                 res.send([result])
             }
         })
+    },
+    deletedata: function (req, res) {
+      let carName = req.query.name;
+      let carModel = req.query.model;
+      let carColor = req.query.color;
+    
+      ModelPageModel.deleteOne(
+        {
+          name: carName,
+          model: carModel,
+          color: carColor
+        },
+        (err) => {
+          if (!err) {
+            console.log("Data Deleted Successfully");
+            res.send("Data Deleted Successfully");
+          } else {
+            console.log("Data Deleting Failed");
+            res.send("Data Deleting Failed");
+          }
+        }
+      );
     }
+    
 }

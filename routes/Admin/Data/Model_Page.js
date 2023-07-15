@@ -24,7 +24,8 @@ const upload = multer({ storage: first, filefilter: second });
 
 
 route.post("/Post" ,upload.fields([{name : "carimage" , maxCount:1} , {name : 'productimage'} , {name : 'threesixty'}]) ,ModelPageController.adddata);
+route.get("/GetAll", ModelPageController.getall)
 route.get("/Get", ModelPageController.getdata)
 route.get('/single',ModelPageController.getonedata);
-// route.delete('/deleteone' , ModelPageController.deleteonedata);
+route.delete('/Delete' , ModelPageController.deletedata);
 module.exports = route
