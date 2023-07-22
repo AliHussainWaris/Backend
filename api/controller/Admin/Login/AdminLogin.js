@@ -22,15 +22,27 @@ module.exports = {
             }
         })
     },
-    getdata:function(){
+    getdata:function(req,res){
         AdminLogins.find((err,result)=>{
             if(!err){
+                res.status(200).send(result)
                 console.log(result)
             }
             else{
                 console.log("Error Occured : " , err)
             }
         })
+    },
+    getAdmindata: function (req, res) {
+        AdminLogins.find({ admin: req.body.admin }, (err, result) => {
+            if (!err) {
+                console.log("User Admin:", result);
+                res.status(200).send(result);
+            } else {
+                console.log("Error Occurred:", err);
+                res.status(500).send("Error occurred while fetching admin data");
+            }
+        });
     },
     getonedata: function (req, res) {
         let password = req.body.password;
@@ -69,13 +81,16 @@ module.exports = {
         })
     },
     deletedata:function(req,res){
-        AdminLogins.findOneAndDelete({email:req.body.email},(err,result)=>{
+        AdminLogins.deleteOne({
+            email:req.body.email
+        },(err)=>{
             if(!err){
-                res.send("Data Deleted")
-                console.log("Data Deleted",result)
+                res.send("Data Deleted Successfully")
+                console.log("Data Deleted Successfully")
             }
             else{
-                console(err)
+                console.log("Data Deleting Failed")
+                res.send("Data Deleting Failed")
             }
         })
     }

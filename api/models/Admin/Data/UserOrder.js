@@ -5,6 +5,7 @@ const ProductPageSchema = new Schema(
   {
     userid: String ,
     name: String,
+    email : String,
     carname: String,
     carmodel: String,
     carprice: Number,

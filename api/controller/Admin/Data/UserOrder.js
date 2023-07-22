@@ -6,6 +6,7 @@ module.exports = {
       {
         userid: req.body.userid,
         name: req.body.name,
+        email: req.body.email,
         carname: req.body.carname,
         carmodel: req.body.carmodel,
         carprice: req.body.carprice,
@@ -25,4 +26,26 @@ module.exports = {
       }
     );
   },
+  getdata:function(req,res){
+    UserData.find((err,result)=>{
+        if(!err){
+            res.status(200).send(result)
+            console.log(result)
+        }
+        else{
+            console.log("Error Occured : " , err)
+        }
+    })
+  },
+  deleteone:function(req ,res){
+    UserData.deleteOne({_id:req.body._id},(err)=>{
+      if(!err){
+        res.send("Delete Successfully")
+        console.log("Delete Successfully")
+      }
+      else{
+        console.log("Error" , err)
+      }
+    })
+  }
 };
