@@ -34,7 +34,8 @@ module.exports = {
         })
     },
     getAdmindata: function (req, res) {
-        AdminLogins.find({ admin: req.body.admin }, (err, result) => {
+        const isAdmin = req.query.admin;
+        AdminLogins.find({ admin: isAdmin }, (err, result) => {
             if (!err) {
                 console.log("User Admin:", result);
                 res.status(200).send(result);
